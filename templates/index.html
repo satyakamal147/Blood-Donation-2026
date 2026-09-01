@@ -1,0 +1,416 @@
+{% extends "base.html" %}
+
+{% block title %}GRIET Mega Blood Donation 2026 | Be a Hero. Donate Blood.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-grid">
+      <!-- Left Content -->
+      <div class="hero-content">
+        <div class="hero-badge-group">
+          <span class="badge badge-red">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            NSS GRIET Flagship Drive
+          </span>
+          <span class="badge badge-nss">GRIET Autonomous</span>
+        </div>
+
+        <h1 class="hero-title">
+          Be a Hero.<br>
+          <span class="text-gradient">Donate Blood.</span>
+        </h1>
+
+        <h2 class="hero-subtitle">GRIET Mega Blood Donation 2026</h2>
+
+        <p class="hero-description">
+          One simple act can make a meaningful difference. Join NSS GRIET in our mission to encourage voluntary blood donation across our campus community.
+        </p>
+
+        <!-- Prominent Key Specs -->
+        <div class="hero-key-pills">
+          <div class="hero-pill highlight">
+            <span class="pill-label">Target Goal</span>
+            <span class="pill-value">800+ Units</span>
+          </div>
+          <div class="hero-pill">
+            <span class="pill-label">Venue</span>
+            <span class="pill-value">GRIET Campus</span>
+          </div>
+          <div class="hero-pill">
+            <span class="pill-label">Registration Deadline</span>
+            <span class="pill-value">21 Sept 2026</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="hero-cta-group">
+          <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            REGISTER NOW
+          </a>
+          <a href="#guidelines" class="btn btn-secondary btn-lg">
+            KNOW BEFORE YOU DONATE
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Visual Graphic -->
+      <div class="hero-visual-wrapper">
+        <div class="hero-illustration-container">
+          <img src="{{ url_for('static', filename='images/hero-illustration.svg') }}" alt="Blood Donation Illustration" class="floating-element" width="460" height="460">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Countdown Strip Section -->
+<div class="container">
+  <div class="countdown-strip">
+    <div class="countdown-wrapper">
+      <div class="countdown-label-group">
+        <div class="countdown-pulse"></div>
+        <div>
+          <div class="countdown-title" id="countdownStatus">Registration Closes In</div>
+          <div class="countdown-subtitle">Deadline: 21 September 2026 (11:59 PM IST)</div>
+        </div>
+      </div>
+
+      <div class="countdown-timer">
+        <div class="timer-box">
+          <span class="timer-num" id="countDays">00</span>
+          <span class="timer-unit">Days</span>
+        </div>
+        <span class="timer-sep">:</span>
+        <div class="timer-box">
+          <span class="timer-num" id="countHours">00</span>
+          <span class="timer-unit">Hours</span>
+        </div>
+        <span class="timer-sep">:</span>
+        <div class="timer-box">
+          <span class="timer-num" id="countMins">00</span>
+          <span class="timer-unit">Mins</span>
+        </div>
+        <span class="timer-sep">:</span>
+        <div class="timer-box">
+          <span class="timer-num" id="countSecs">00</span>
+          <span class="timer-unit">Secs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Target & Live Counter Section -->
+<section class="stats-section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-red section-tag">Event Milestones</span>
+      <h2 class="section-title">800+ Blood Units. <span class="text-gradient">One GRIET.</span></h2>
+      <p class="section-subtitle">Our goal is to encourage 800+ blood unit donations through the GRIET community.</p>
+    </div>
+
+    <div class="stats-grid">
+      <!-- Target Goal -->
+      <div class="stat-card featured">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-number text-gradient">800+</div>
+        <div class="stat-label">Blood Units Target</div>
+        <div class="stat-subtext">Estimated impact on saving up to 2,400 lives</div>
+      </div>
+
+      <!-- Live Donor Registrations -->
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-number" style="color: var(--nss-blue);">{{ donor_count }}</div>
+        <div class="stat-label">Registered Donors</div>
+        <div class="stat-subtext">{{ donor_count }} donors have registered so far</div>
+      </div>
+
+      <!-- Active Volunteers -->
+      <div class="stat-card">
+        <div class="stat-icon">🤝</div>
+        <div class="stat-number" style="color: var(--primary-red);">{{ volunteer_count }}</div>
+        <div class="stat-label">Student Volunteers</div>
+        <div class="stat-subtext">Dedicated NSS coordinators facilitating the drive</div>
+      </div>
+
+      <!-- Venue & Location -->
+      <div class="stat-card">
+        <div class="stat-icon">📍</div>
+        <div class="stat-number" style="font-size: 2rem; padding: 6px 0;">GRIET Campus</div>
+        <div class="stat-label">Open to Students &amp; Staff</div>
+        <div class="stat-subtext">Bachupally, Hyderabad</div>
+      </div>
+    </div>
+
+    <p style="text-align:center; font-size:0.85rem; color:var(--text-light); margin-top:24px;">
+      * Note: Registration count reflects enrolled participants. Actual collected blood units are recorded upon donation at the venue.
+    </p>
+  </div>
+</section>
+
+<!-- Why Donate Section -->
+<section class="why-donate-section" id="why-donate">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-red section-tag">Why It Matters</span>
+      <h2 class="section-title">Your decision can <span class="text-gradient">make a difference.</span></h2>
+      <p class="section-subtitle">Every single drop contributes to saving precious lives during emergencies and critical treatments.</p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Give Hope</h3>
+        <p class="feature-text">Your single voluntary donation can provide life-saving support for patients battling major illnesses, surgeries, or unexpected accidents.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Support Patients</h3>
+        <p class="feature-text">Blood cannot be manufactured. Hospitals rely entirely on compassionate individuals like you to maintain critical reserves.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 8v8"></path>
+            <path d="M8 12h8"></path>
+          </svg>
+        </div>
+        <h3 class="feature-title">Strengthen Community</h3>
+        <p class="feature-text">When our GRIET student body and staff unite for a noble humanitarian cause, we inspire positive civic responsibility across Hyderabad.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <h3 class="feature-title">Be Part of the Movement</h3>
+        <p class="feature-text">Join hundreds of fellow students and faculty making a real, tangible community contribution under the NSS motto: <em>"Not Me But You"</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Official Do's & Don'ts Section (Directly mapped from NSS GRIET poster) -->
+<section class="guidelines-section" id="guidelines">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-nss section-tag">Official NSS &amp; GRIET Guidelines</span>
+      <h2 class="section-title">DO'S &amp; DON'TS <span class="text-gradient">OF DONATING BLOOD</span></h2>
+      <p class="section-subtitle">Please review the official eligibility guidelines carefully before coming to the donation drive.</p>
+    </div>
+
+    <div class="dos-donts-grid">
+      <!-- DO'S CARD -->
+      <div class="guideline-col dos">
+        <div class="guideline-header">
+          <div class="guideline-icon">👍</div>
+          <h3 class="guideline-title" style="color: #16a34a;">DO'S</h3>
+        </div>
+        <ul class="guideline-list">
+          <li class="guideline-item">
+            <span class="guideline-bullet">✓</span>
+            <div><strong>Be in good health</strong> and have healthy and iron-rich foods prior to donation.</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✓</span>
+            <div><strong>Eat 3 hours prior</strong> to donation to maintain steady energy levels.</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✓</span>
+            <div>Make sure you are <strong>18 years old</strong> and weigh <strong>at least 45 Kgs</strong>.</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✓</span>
+            <div><strong>Stay hydrated</strong> by drinking plenty of water and take adequate rest the night before.</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✓</span>
+            <div><strong>Ensure to share your medical history</strong> and current medications truthfully with the doctors.</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- DON'TS CARD -->
+      <div class="guideline-col donts">
+        <div class="guideline-header">
+          <div class="guideline-icon">👎</div>
+          <h3 class="guideline-title" style="color: #dc2626;">DON'TS</h3>
+        </div>
+        <ul class="guideline-list">
+          <li class="guideline-item">
+            <span class="guideline-bullet">✗</span>
+            <div><strong>Don't donate</strong> if you have any active health issues or chronic illnesses.</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✗</span>
+            <div><strong>Don't donate</strong> if you are under 17 years of age or underweight (&lt; 45 kg).</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✗</span>
+            <div><strong>Don't drink alcohol or smoke</strong> within 48 hours prior to donating blood.</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✗</span>
+            <div><strong>Don't donate</strong> if you had a tattoo or piercing within the last 1 year.</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✗</span>
+            <div><strong>Don't donate</strong> if you have cold, sore throat, fever, or any other infection.</div>
+          </li>
+          <li class="guideline-item">
+            <span class="guideline-bullet">✗</span>
+            <div>Girls are advised <strong>not to donate blood</strong> immediately before, during, or right after menstrual periods.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="official-disclaimer">
+      <strong>Medical Protocol Notice:</strong> Final eligibility to donate blood will be assessed and confirmed by the authorized medical and blood-bank team at the GRIET Campus event.
+    </div>
+  </div>
+</section>
+
+<!-- Precautions Triplet (Before, During, After) -->
+<section class="precautions-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-red section-tag">Care &amp; Comfort</span>
+      <h2 class="section-title">Before, During &amp; After Donation</h2>
+      <p class="section-subtitle">Here is what you can expect during every phase of your donation journey.</p>
+    </div>
+
+    <div class="stages-grid">
+      <!-- Stage 1 -->
+      <div class="stage-card">
+        <span class="stage-badge before">Phase 1: Before</span>
+        <h3 class="stage-title">Preparation</h3>
+        <ul class="stage-checklist">
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Drink 500ml water before arriving</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Eat a light meal 2-3 hours prior</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Get a sound 7-8 hours sleep</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Carry College ID / Govt Photo ID</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="stage-card">
+        <span class="stage-badge during">Phase 2: During</span>
+        <h3 class="stage-title">At the Bed</h3>
+        <ul class="stage-checklist">
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Follow medical staff instructions</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Relax and squeeze the sponge gently</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Takes only 8-10 minutes for collection</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Inform staff immediately if feeling dizzy</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="stage-card">
+        <span class="stage-badge after">Phase 3: After</span>
+        <h3 class="stage-title">Post-Donation</h3>
+        <ul class="stage-checklist">
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Rest at observation area for 10 mins</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Enjoy complimentary fruit juice &amp; snacks</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Avoid heavy lifting for rest of the day</span>
+          </li>
+          <li class="stage-check-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Collect Donor Certificate from NSS desk</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Volunteer CTA Banner -->
+<div class="container">
+  <div class="volunteer-banner">
+    <div class="volunteer-wrapper">
+      <div>
+        <span class="badge badge-nss" style="background: rgba(255,255,255,0.15); color:#fff; border-color:rgba(255,255,255,0.3); margin-bottom:12px;">NSS Volunteer Team</span>
+        <h3 class="volunteer-title">Want to Help Beyond Donating?</h3>
+        <p class="volunteer-desc">Join NSS GRIET as an event volunteer for donor coordination, registration desk, refreshments, crowd management, or photography.</p>
+      </div>
+      <div>
+        <a href="{{ url_for('volunteer') }}" class="btn btn-secondary btn-lg" style="background:#ffffff; color:var(--nss-blue); border-color:#ffffff;">
+          JOIN AS VOLUNTEER
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fast Registration CTA Section -->
+<section class="register-section">
+  <div class="container container-sm">
+    <div class="section-header">
+      <span class="badge badge-red section-tag">Join The Mission</span>
+      <h2 class="section-title">Ready to Save Lives?</h2>
+      <p class="section-subtitle">Secure your donor time slot now. It takes less than 60 seconds.</p>
+      <div style="margin-top: 24px;">
+        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg" style="padding: 18px 42px; font-size: 1.15rem;">
+          PROCEED TO REGISTRATION FORM
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

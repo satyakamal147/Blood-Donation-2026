@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Join as Volunteer | NSS GRIET Blood Donation 2026{% endblock %}
+
+{% block content %}
+<div class="register-section">
+  <div class="container container-sm">
+    <div class="form-card">
+      <div class="form-header">
+        <span class="badge badge-nss" style="margin-bottom: 12px;">NSS GRIET Volunteering</span>
+        <h1 style="font-size: 2.2rem; margin-bottom: 8px;">Join as an Event Volunteer</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Help NSS GRIET manage registration desks, donor care, crowd direction, refreshments, and logistics.
+        </p>
+      </div>
+
+      <form method="POST" action="{{ url_for('volunteer') }}">
+        <div class="form-grid">
+          
+          <!-- Full Name -->
+          <div class="form-group full-width">
+            <label for="name" class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="e.g. Sai Teja" required>
+          </div>
+
+          <!-- College Roll No -->
+          <div class="form-group">
+            <label for="college_id" class="form-label">College Roll Number <span class="required">*</span></label>
+            <input type="text" id="college_id" name="college_id" class="form-control" placeholder="e.g. 22241A0599" required>
+          </div>
+
+          <!-- Contact Phone -->
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" required>
+          </div>
+
+          <!-- Department -->
+          <div class="form-group">
+            <label for="department" class="form-label">Department / Branch <span class="required">*</span></label>
+            <select id="department" name="department" class="form-control" required>
+              <option value="" disabled selected>Select Department</option>
+              <option value="Computer Science & Engineering">Computer Science &amp; Engineering</option>
+              <option value="CSE - AI & ML">CSE (AI &amp; ML)</option>
+              <option value="CSE - Data Science">CSE (Data Science)</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Electronics & Communication">Electronics &amp; Communication</option>
+              <option value="Electrical & Electronics">Electrical &amp; Electronics</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+              <option value="Civil Engineering">Civil Engineering</option>
+              <option value="Humanities & Sciences">Humanities &amp; Sciences</option>
+            </select>
+          </div>
+
+          <!-- Year of Study -->
+          <div class="form-group">
+            <label for="year" class="form-label">Year of Study <span class="required">*</span></label>
+            <select id="year" name="year" class="form-control" required>
+              <option value="" disabled selected>Select Year</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+            </select>
+          </div>
+
+          <!-- Preferred Role -->
+          <div class="form-group full-width">
+            <label for="preferred_role" class="form-label">Preferred Volunteer Role <span class="required">*</span></label>
+            <select id="preferred_role" name="preferred_role" class="form-control" required>
+              <option value="" disabled selected>Choose a volunteering role</option>
+              <option value="Registration Desk">Registration Desk (Verifying IDs &amp; check-ins)</option>
+              <option value="Donor Assistance">Donor Assistance (Guiding donors &amp; aftercare)</option>
+              <option value="Crowd Management">Crowd Management (Queue &amp; hall direction)</option>
+              <option value="Help Desk">Help Desk (Answering general inquiries)</option>
+              <option value="Refreshments">Refreshments (Distributing juice &amp; snacks)</option>
+              <option value="Photography">Photography / Media Coverage</option>
+              <option value="Social Media">Social Media &amp; Campaign Promotion</option>
+              <option value="General Volunteer">General Event Volunteer</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 24px;">
+          <button type="submit" class="btn btn-primary btn-block btn-lg">
+            SUBMIT VOLUNTEER APPLICATION
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

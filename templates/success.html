@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Registration Successful | GRIET Mega Blood Donation 2026{% endblock %}
+
+{% block content %}
+<div class="register-section">
+  <div class="container container-xs">
+    <div class="success-card">
+      <div class="success-icon-badge">
+        ✓
+      </div>
+
+      <h1 style="font-size: 2.1rem; margin-bottom: 8px;">REGISTRATION SUCCESSFUL</h1>
+      <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 20px;">
+        Thank you, <strong>{{ donor.full_name }}</strong>! You're taking a life-saving step.
+      </p>
+
+      <!-- Unique ID Highlight Box -->
+      <div class="success-id-box">
+        <div class="id-label">Your Unique Registration ID</div>
+        <div class="id-value">{{ donor.registration_id }}</div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;">
+          Save your Registration ID for future reference and verification at the venue.
+        </p>
+      </div>
+
+      <!-- Detail Summary -->
+      <div class="success-details-grid">
+        <div>
+          <span class="detail-item-label">Donor Name</span>
+          <div class="detail-item-value">{{ donor.full_name }}</div>
+        </div>
+        <div>
+          <span class="detail-item-label">Registration Status</span>
+          <div class="detail-item-value" style="color: var(--success); font-weight: 800;">{{ donor.status | upper }}</div>
+        </div>
+        <div>
+          <span class="detail-item-label">Blood Group</span>
+          <div class="detail-item-value">{{ donor.blood_group }}</div>
+        </div>
+        <div>
+          <span class="detail-item-label">Preferred Time Slot</span>
+          <div class="detail-item-value">{{ donor.preferred_slot }}</div>
+        </div>
+        <div>
+          <span class="detail-item-label">Department &amp; Year</span>
+          <div class="detail-item-value">{{ donor.department }} ({{ donor.year }})</div>
+        </div>
+        <div>
+          <span class="detail-item-label">Venue</span>
+          <div class="detail-item-value">GRIET Campus</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <button onclick="window.print()" class="btn btn-secondary btn-block">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Print / Save Confirmation
+        </button>
+        <a href="{{ url_for('check_registration') }}" class="btn btn-outline btn-block">
+          CHECK REGISTRATION
+        </a>
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-block">
+          Return to Homepage
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

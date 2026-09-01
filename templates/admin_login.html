@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login | NSS GRIET Blood Donation 2026{% endblock %}
+
+{% block content %}
+<div class="register-section">
+  <div class="container container-xs">
+    <div class="form-card">
+      <div class="form-header">
+        <span class="badge badge-nss" style="margin-bottom: 12px;">Authorized Access Only</span>
+        <h1 style="font-size: 2rem; margin-bottom: 8px;">NSS Coordinator Login</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Sign in to access registration lists, export CSV data, and view real-time campaign analytics.
+        </p>
+      </div>
+
+      <form method="POST" action="{{ url_for('admin_login') }}">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="username" class="form-label">Admin Username</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Enter username (e.g. admin)" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter secure password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          LOG IN TO DASHBOARD
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; padding: 14px; background: var(--bg-warm); border-radius: var(--radius-md); font-size: 0.82rem; color: var(--text-muted); text-align: center;">
+        <strong>Demo Development Credentials:</strong><br>
+        Username: <code style="color:var(--primary-red);">admin</code> &bull; Password: <code style="color:var(--primary-red);">admin@griet2026</code>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

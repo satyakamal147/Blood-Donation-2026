@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="96" fill="#1c2d82" stroke="#ffffff" stroke-width="4"/>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="4 3"/>
+  <!-- Inner Red Disc -->
+  <circle cx="100" cy="100" r="54" fill="#dc2626"/>
+  <!-- Konark Sun Temple Wheel 8 Spokes -->
+  <g stroke="#ffffff" stroke-width="6" stroke-linecap="round">
+    <line x1="100" y1="100" x2="100" y2="48" />
+    <line x1="100" y1="100" x2="100" y2="152" />
+    <line x1="100" y1="100" x2="48" y2="100" />
+    <line x1="100" y1="100" x2="152" y2="100" />
+    <line x1="100" y1="100" x2="63" y2="63" />
+    <line x1="100" y1="100" x2="137" y2="137" />
+    <line x1="100" y1="100" x2="137" y2="63" />
+    <line x1="100" y1="100" x2="63" y2="137" />
+  </g>
+  <!-- Spoke Knobs -->
+  <g fill="#ffffff">
+    <circle cx="100" cy="65" r="5"/>
+    <circle cx="100" cy="135" r="5"/>
+    <circle cx="65" cy="100" r="5"/>
+    <circle cx="135" cy="100" r="5"/>
+    <circle cx="75" cy="75" r="5"/>
+    <circle cx="125" cy="125" r="5"/>
+    <circle cx="125" cy="75" r="5"/>
+    <circle cx="75" cy="125" r="5"/>
+  </g>
+  <!-- Center Hub -->
+  <circle cx="100" cy="100" r="16" fill="#ffffff"/>
+  <circle cx="100" cy="100" r="8" fill="#1c2d82"/>
+  <!-- Circular Text -->
+  <path id="textPathTop" d="M 30,100 A 70,70 0 0,1 170,100" fill="none" />
+  <path id="textPathBottom" d="M 170,100 A 70,70 0 0,1 30,100" fill="none" />
+  <text fill="#ffffff" font-size="14" font-family="'Arial', sans-serif" font-weight="bold" letter-spacing="2">
+    <textPath href="#textPathTop" startOffset="50%" text-anchor="middle">राष्ट्रीय सेवा योजना</textPath>
+  </text>
+  <text fill="#ffffff" font-size="11" font-family="'Arial', sans-serif" font-weight="bold" letter-spacing="2">
+    <textPath href="#textPathBottom" startOffset="50%" text-anchor="middle">NATIONAL SERVICE SCHEME</textPath>
+  </text>
+</svg>

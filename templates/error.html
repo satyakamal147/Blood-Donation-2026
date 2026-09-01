@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Error {{ code }} | GRIET Blood Donation 2026{% endblock %}
+
+{% block content %}
+<div class="register-section">
+  <div class="container container-xs">
+    <div class="form-card" style="text-align: center;">
+      <span class="badge badge-red" style="font-size: 1.1rem; padding: 8px 20px; margin-bottom: 16px;">Error {{ code }}</span>
+      <h1 style="font-size: 2.2rem; margin-bottom: 12px;">{{ title }}</h1>
+      <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 28px;">
+        {{ message }}
+      </p>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Return to Homepage</a>
+        <a href="{{ url_for('register') }}" class="btn btn-secondary btn-lg">Register as Donor</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Frequently Asked Questions | GRIET Blood Donation 2026{% endblock %}
+
+{% block content %}
+<div class="faq-section">
+  <div class="container container-sm">
+    <div class="section-header">
+      <span class="badge badge-red section-tag">Help &amp; Queries</span>
+      <h1 class="section-title">Frequently Asked Questions</h1>
+      <p class="section-subtitle">Find immediate answers to common questions about eligibility, registration, and the event.</p>
+    </div>
+
+    <div class="faq-container">
+      
+      <!-- FAQ 1 -->
+      <div class="faq-item active">
+        <button class="faq-question">
+          <span>Who can register and donate blood?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer" style="max-height: 200px;">
+          Any healthy individual who is at least 18 years old and weighs at least 45 kg is welcome to register. Both students and faculty/staff of GRIET as well as authorized campus visitors are eligible.
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Where and when will the event take place?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          The event is hosted at the <strong>GRIET Campus, Bachupally, Hyderabad</strong>. The online registration deadline is <strong>21 September 2026</strong>.
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>How do I register for the donation drive?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          Simply click the <strong>REGISTER NOW</strong> button, fill in your details (name, roll number, blood group, preferred time slot), and submit. You will receive an instant unique Registration ID (e.g. GRIET-BD-0042).
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What should I do before donating?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          Stay well hydrated by drinking 500ml of water, eat a healthy meal 2 to 3 hours prior to donation, and ensure at least 7-8 hours of sleep the night before.
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What should I avoid before donation?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          Do not consume alcohol or smoke for at least 48 hours prior to donation. Avoid donating if you have active fever/cold or if you have had a tattoo or piercing within the past 12 months.
+        </div>
+      </div>
+
+      <!-- FAQ 6 -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What documents should I bring to the venue?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          Please carry your <strong>GRIET Student / Staff Identity Card</strong> or any valid Government Photo ID (Aadhaar / Driving License / Voter ID) along with your Registration ID.
+        </div>
+      </div>
+
+      <!-- FAQ 7 -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Can I check my registration status later?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          Yes! You can visit the <a href="{{ url_for('check_registration') }}" style="color:var(--primary-red); font-weight:700;">Check Registration</a> page and search using your Registration ID or your 10-digit mobile number at any time.
+        </div>
+      </div>
+
+      <!-- FAQ 8 -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>What if I have an ongoing medical condition?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          Please consult the authorized medical and blood-bank team at the event. Final eligibility to donate blood will be assessed and confirmed by licensed medical practitioners on-site.
+        </div>
+      </div>
+
+      <!-- FAQ 9 -->
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>Can I cancel or modify my registration if my schedule changes?</span>
+          <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="faq-answer">
+          If you are unable to attend during your allotted slot, you can reach out to the NSS Help Desk coordinators at the venue or contact the NSS team.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick CTA -->
+    <div style="text-align: center; margin-top: 50px;">
+      <p style="color: var(--text-muted); margin-bottom: 16px;">Have more questions or ready to register?</p>
+      <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">REGISTER AS DONOR NOW</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

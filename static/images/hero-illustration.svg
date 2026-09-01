@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fee2e2" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#fecaca" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="dropGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="50%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+    <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#be123c"/>
+    </linearGradient>
+    <linearGradient id="handGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fed7aa"/>
+      <stop offset="100%" stop-color="#fba180"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#991b1b" flood-opacity="0.25"/>
+    </filter>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient background glow circles -->
+  <circle cx="250" cy="250" r="210" fill="url(#bgGlow)"/>
+  <circle cx="250" cy="250" r="160" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Pulse Rings -->
+  <circle cx="250" cy="210" r="130" fill="none" stroke="#fca5a5" stroke-width="2" stroke-dasharray="6 6" class="animate-spin-slow"/>
+  <circle cx="250" cy="210" r="155" fill="none" stroke="#fecaca" stroke-width="1.5"/>
+
+  <!-- Helping Hands Cupping from Bottom -->
+  <!-- Left Hand -->
+  <path d="M 120 380 C 130 330, 160 310, 200 315 C 220 318, 235 330, 245 345 C 220 355, 180 370, 140 420 Z" fill="url(#handGrad)" opacity="0.95" filter="url(#softShadow)"/>
+  <!-- Right Hand -->
+  <path d="M 380 380 C 370 330, 340 310, 300 315 C 280 318, 265 330, 255 345 C 280 355, 320 370, 360 420 Z" fill="url(#handGrad)" opacity="0.95" filter="url(#softShadow)"/>
+
+  <!-- Center Floating Giant Blood Drop with Soft Shadow -->
+  <g filter="url(#softShadow)" class="floating-element">
+    <path d="M 250 110 C 250 110, 330 210, 330 260 C 330 305, 294 340, 250 340 C 206 340, 170 305, 170 260 C 170 210, 250 110, 250 110 Z" fill="url(#dropGrad)"/>
+    
+    <!-- Shiny drop highlight -->
+    <path d="M 225 180 C 215 210, 200 240, 200 265 C 200 275, 205 285, 210 290 C 205 280, 205 255, 215 230 C 222 210, 235 190, 240 180 Z" fill="#ffffff" opacity="0.6"/>
+    <ellipse cx="230" cy="270" rx="10" ry="18" fill="#ffffff" opacity="0.4" transform="rotate(-20 230 270)"/>
+
+    <!-- Lifeline Heartbeat Pulse Inside Drop -->
+    <path d="M 195 260 L 220 260 L 230 240 L 245 280 L 258 245 L 268 265 L 275 260 L 305 260" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Small Floating Accent Blood Drops -->
+  <g filter="url(#softShadow)">
+    <!-- Top Left Drop -->
+    <path d="M 100 130 C 100 130, 120 160, 120 175 C 120 186, 111 195, 100 195 C 89 195, 80 186, 80 175 C 80 160, 100 130, 100 130 Z" fill="url(#dropGrad)"/>
+    <!-- Top Right Heart -->
+    <path d="M 390 145 C 390 130, 375 120, 360 135 C 345 120, 330 130, 330 145 C 330 170, 360 190, 360 190 C 360 190, 390 170, 390 145 Z" fill="url(#heartGrad)"/>
+    <!-- Tiny Medical Cross Badge -->
+    <circle cx="380" cy="270" r="22" fill="#ffffff" filter="url(#softShadow)"/>
+    <path d="M 376 256 H 384 V 284 H 376 Z M 366 266 H 394 V 274 H 366 Z" fill="#dc2626"/>
+    <!-- Blood Types Badge -->
+    <g transform="translate(70, 240)">
+      <rect width="60" height="34" rx="17" fill="#ffffff" filter="url(#softShadow)"/>
+      <text x="30" y="22" fill="#dc2626" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="14" text-anchor="middle">O+</text>
+    </g>
+    <g transform="translate(340, 80)">
+      <rect width="60" height="34" rx="17" fill="#ffffff" filter="url(#softShadow)"/>
+      <text x="30" y="22" fill="#dc2626" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="14" text-anchor="middle">AB+</text>
+    </g>
+  </g>
+</svg>

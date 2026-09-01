@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GRIET Mega Blood Donation 2026 organized by NSS GRIET. Be a hero, donate blood, and save lives. Registration deadline: 21 September 2026 at GRIET Campus.">
+  <title>{% block title %}GRIET Mega Blood Donation 2026 | NSS GRIET{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Main Style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/nss-logo.svg') }}" type="image/svg+xml">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="{{ url_for('index') }}" class="brand-wrapper">
+          <div class="brand-logos">
+            <img src="{{ url_for('static', filename='images/griet-logo.svg') }}" alt="GRIET Logo" class="brand-logo">
+            <div class="brand-divider"></div>
+            <img src="{{ url_for('static', filename='images/nss-logo.svg') }}" alt="NSS Logo" class="brand-logo">
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">GRIET BLOOD DONATION</span>
+            <span class="brand-subtitle">NSS GRIET Community Drive</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+          <li><a href="{{ url_for('index') }}#about" class="nav-link">About</a></li>
+          <li><a href="{{ url_for('index') }}#why-donate" class="nav-link">Why Donate</a></li>
+          <li><a href="{{ url_for('index') }}#guidelines" class="nav-link">Before You Donate</a></li>
+          <li><a href="{{ url_for('faq') }}" class="nav-link">FAQ</a></li>
+          <li><a href="{{ url_for('check_registration') }}" class="nav-link">Check Status</a></li>
+          <li><a href="{{ url_for('volunteer') }}" class="nav-link">Volunteer</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="{{ url_for('register') }}" class="btn btn-primary btn-sm">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            </svg>
+            REGISTER NOW
+          </a>
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Flash Notification Messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container flash-messages">
+        {% for category, message in messages %}
+          <div class="flash-alert flash-{{ category }}">
+            <span>{{ message }}</span>
+            <button class="flash-close" aria-label="Dismiss">&times;</button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Main Content Block -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logos">
+            <img src="{{ url_for('static', filename='images/griet-logo.svg') }}" alt="GRIET Logo" width="46" height="46">
+            <img src="{{ url_for('static', filename='images/nss-logo.svg') }}" alt="NSS Logo" width="46" height="46">
+          </div>
+          <h4 style="color:#fff; margin-top:8px;">GRIET Mega Blood Donation 2026</h4>
+          <p style="font-size:0.9rem; max-width:320px;">
+            An initiative organized by NSS GRIET (National Service Scheme) at Gokaraju Rangaraju Institute of Engineering and Technology.
+          </p>
+          <span class="badge badge-nss" style="align-self: flex-start;">NOT ME BUT YOU</span>
+        </div>
+
+        <div>
+          <h5 class="footer-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('register') }}">Register as Donor</a></li>
+            <li><a href="{{ url_for('check_registration') }}">Check Registration</a></li>
+            <li><a href="{{ url_for('volunteer') }}">Volunteer With Us</a></li>
+            <li><a href="{{ url_for('faq') }}">Frequently Asked Questions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="footer-title">Event Info</h5>
+          <ul class="footer-links">
+            <li><strong>Venue:</strong> GRIET Campus</li>
+            <li><strong>Target:</strong> 800+ Blood Units</li>
+            <li><strong>Deadline:</strong> 21 September 2026</li>
+            <li><strong>Eligibility:</strong> Age 18+, Wt 45kg+</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="footer-title">Coordinator Access</h5>
+          <ul class="footer-links">
+            <li><a href="{{ url_for('admin_login') }}">Admin / NSS Login</a></li>
+            <li><a href="mailto:nss@griet.ac.in">Contact NSS Team</a></li>
+            <li><span style="font-size:0.8rem; color:#64748b;">Bachupally, Kukatpally, Hyderabad - 500090</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 NSS GRIET. Gokaraju Rangaraju Institute of Engineering and Technology. All rights reserved.</p>
+        <p style="font-size:0.8rem; color:#64748b;">Final donor eligibility is assessed by the authorized medical team on-site.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

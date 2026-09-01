@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Donor Registration | GRIET Mega Blood Donation 2026{% endblock %}
+
+{% block content %}
+<div class="register-section">
+  <div class="container container-sm">
+    <div class="form-card">
+      <div class="form-header">
+        <span class="badge badge-red" style="margin-bottom: 12px;">Donor Registration Form</span>
+        <h1 style="font-size: 2.2rem; margin-bottom: 8px;">GRIET Mega Blood Donation 2026</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Venue: <strong>GRIET Campus</strong> &bull; Registration Deadline: <strong>21 September 2026</strong>
+        </p>
+      </div>
+
+      <!-- Registration Form -->
+      <form id="donorRegistrationForm" method="POST" action="{{ url_for('register') }}">
+        <div class="form-grid">
+          
+          <!-- Full Name -->
+          <div class="form-group full-width">
+            <label for="full_name" class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="e.g. Rahul Sharma" required>
+          </div>
+
+          <!-- Mobile Number -->
+          <div class="form-group">
+            <label for="mobile" class="form-label">Mobile Number <span class="required">*</span></label>
+            <input type="tel" id="mobile" name="mobile" class="form-control" placeholder="10-digit mobile number" pattern="[6-9][0-9]{9}" required>
+            <span class="form-hint">Used for SMS confirmation and status lookup</span>
+          </div>
+
+          <!-- Email Address -->
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="name@griet.in or personal email" required>
+          </div>
+
+          <!-- College / Employee ID -->
+          <div class="form-group">
+            <label for="college_id" class="form-label">College Roll No. / Employee ID <span class="required">*</span></label>
+            <input type="text" id="college_id" name="college_id" class="form-control" placeholder="e.g. 22241A0501 or EMP-102" required>
+          </div>
+
+          <!-- Department -->
+          <div class="form-group">
+            <label for="department" class="form-label">Department / Branch <span class="required">*</span></label>
+            <select id="department" name="department" class="form-control" required>
+              <option value="" disabled selected>Select your department</option>
+              <option value="Computer Science & Engineering">Computer Science &amp; Engineering (CSE)</option>
+              <option value="CSE - AI & ML">CSE (Artificial Intelligence &amp; ML)</option>
+              <option value="CSE - Data Science">CSE (Data Science)</option>
+              <option value="Information Technology">Information Technology (IT)</option>
+              <option value="Electronics & Communication">Electronics &amp; Communication (ECE)</option>
+              <option value="Electrical & Electronics">Electrical &amp; Electronics (EEE)</option>
+              <option value="Mechanical Engineering">Mechanical Engineering (ME)</option>
+              <option value="Civil Engineering">Civil Engineering (CE)</option>
+              <option value="Humanities & Sciences">Humanities &amp; Sciences (H&amp;S)</option>
+              <option value="Management Studies / MBA">MBA / Management Studies</option>
+              <option value="Administrative / Non-Teaching Staff">Administrative / Staff</option>
+              <option value="Other">Other / Visitor</option>
+            </select>
+          </div>
+
+          <!-- Year of Study -->
+          <div class="form-group">
+            <label for="year" class="form-label">Year of Study / Category <span class="required">*</span></label>
+            <select id="year" name="year" class="form-control" required>
+              <option value="" disabled selected>Select year</option>
+              <option value="1st Year">1st Year (B.Tech / MBA)</option>
+              <option value="2nd Year">2nd Year (B.Tech)</option>
+              <option value="3rd Year">3rd Year (B.Tech)</option>
+              <option value="4th Year">4th Year (B.Tech)</option>
+              <option value="Faculty / Staff">Faculty / Teaching Staff</option>
+              <option value="Alumni / Visitor">Alumni / External Visitor</option>
+            </select>
+          </div>
+
+          <!-- Blood Group -->
+          <div class="form-group">
+            <label for="blood_group" class="form-label">Blood Group <span class="required">*</span></label>
+            <select id="blood_group" name="blood_group" class="form-control" required>
+              <option value="" disabled selected>Select blood group</option>
+              <option value="O+">O Positive (O+)</option>
+              <option value="O-">O Negative (O-)</option>
+              <option value="A+">A Positive (A+)</option>
+              <option value="A-">A Negative (A-)</option>
+              <option value="B+">B Positive (B+)</option>
+              <option value="B-">B Negative (B-)</option>
+              <option value="AB+">AB Positive (AB+)</option>
+              <option value="AB-">AB Negative (AB-)</option>
+              <option value="Don't Know / Will Test at Venue">Don't Know (Will test at venue)</option>
+            </select>
+          </div>
+
+          <!-- Age -->
+          <div class="form-group">
+            <label for="age" class="form-label">Age (Years) <span class="required">*</span></label>
+            <input type="number" id="age" name="age" class="form-control" min="17" max="65" placeholder="e.g. 20" required>
+            <span class="form-hint">Must be at least 18 for blood donation eligibility</span>
+          </div>
+
+          <!-- Gender -->
+          <div class="form-group">
+            <label for="gender" class="form-label">Gender <span class="required">*</span></label>
+            <select id="gender" name="gender" class="form-control" required>
+              <option value="" disabled selected>Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other / Prefer not to say</option>
+            </select>
+          </div>
+
+          <!-- Preferred Time Slot -->
+          <div class="form-group full-width">
+            <label for="preferred_slot" class="form-label">Preferred Donation Time Slot <span class="required">*</span></label>
+            <select id="preferred_slot" name="preferred_slot" class="form-control" required>
+              <option value="" disabled selected>Choose a convenient time slot</option>
+              <option value="09:30 AM - 10:30 AM">Morning: 09:30 AM - 10:30 AM</option>
+              <option value="10:30 AM - 11:30 AM">Morning: 10:30 AM - 11:30 AM</option>
+              <option value="11:30 AM - 12:30 PM">Noon: 11:30 AM - 12:30 PM</option>
+              <option value="01:30 PM - 02:30 PM">Afternoon: 01:30 PM - 02:30 PM</option>
+              <option value="02:30 PM - 03:30 PM">Afternoon: 02:30 PM - 03:30 PM</option>
+              <option value="03:30 PM - 04:30 PM">Evening: 03:30 PM - 04:30 PM</option>
+            </select>
+          </div>
+
+          <!-- Emergency Contact Name -->
+          <div class="form-group">
+            <label for="emergency_name" class="form-label">Emergency Contact Name <span class="required">*</span></label>
+            <input type="text" id="emergency_name" name="emergency_name" class="form-control" placeholder="Parent / Guardian / Friend" required>
+          </div>
+
+          <!-- Emergency Contact Number -->
+          <div class="form-group">
+            <label for="emergency_phone" class="form-label">Emergency Contact Phone <span class="required">*</span></label>
+            <input type="tel" id="emergency_phone" name="emergency_phone" class="form-control" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+          </div>
+
+          <!-- Address (Optional) -->
+          <div class="form-group full-width">
+            <label for="address" class="form-label">Residential Area / Hostel (Optional)</label>
+            <input type="text" id="address" name="address" class="form-control" placeholder="e.g. GRIET Hostel, Pragathi Nagar, Kukatpally, etc.">
+          </div>
+
+          <!-- Confirmation Checkbox -->
+          <div class="form-group full-width">
+            <div class="checkbox-group">
+              <input type="checkbox" id="consent" name="consent" required>
+              <label for="consent" class="checkbox-label">
+                I confirm that the information provided is correct and I understand that final eligibility for blood donation will be determined by the authorized medical team.
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Submit Button -->
+        <div style="margin-top: 24px;">
+          <button type="submit" class="btn btn-primary btn-block btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            REGISTER FOR BLOOD DONATION
+          </button>
+        </div>
+      </form>
+
+      <!-- Already Registered Quick Link -->
+      <div style="text-align: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-light);">
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          Already registered? <a href="{{ url_for('check_registration') }}" style="color: var(--primary-red); font-weight: 700;">Check your registration status here &rarr;</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+
+{% block title %}Coordinator Dashboard | GRIET Mega Blood Donation 2026{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px;">
+  <!-- Admin Header -->
+  <div class="admin-header">
+    <div>
+      <span class="badge badge-nss">Event Coordinator Portal</span>
+      <h1 style="font-size: 2.2rem; margin-top: 8px;">NSS GRIET Admin Dashboard</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Logged in as: <strong>{{ session.admin_name }}</strong> ({{ session.admin_username }})
+      </p>
+    </div>
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <a href="{{ url_for('admin_export_csv') }}" class="btn btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Export Registrations CSV
+      </a>
+      <a href="{{ url_for('admin_logout') }}" class="btn btn-outline" style="border-color: #fca5a5; color: #b91c1c;">
+        Logout
+      </a>
+    </div>
+  </div>
+
+  <!-- Key Metrics Row -->
+  <div class="stats-grid" style="margin-bottom: 40px;">
+    <!-- Target -->
+    <div class="stat-card featured">
+      <div class="stat-icon">🎯</div>
+      <div class="stat-number text-gradient">800+</div>
+      <div class="stat-label">Blood Units Target</div>
+      <div class="stat-subtext">Community Goal</div>
+    </div>
+
+    <!-- Total Registered Donors -->
+    <div class="stat-card">
+      <div class="stat-icon">🩸</div>
+      <div class="stat-number" style="color: var(--primary-red);">{{ total_donors }}</div>
+      <div class="stat-label">Total Donor Registrations</div>
+      <div class="stat-subtext">Enrolled participants</div>
+    </div>
+
+    <!-- Confirmed Donors -->
+    <div class="stat-card">
+      <div class="stat-icon">✓</div>
+      <div class="stat-number" style="color: var(--success);">{{ confirmed_donors }}</div>
+      <div class="stat-label">Confirmed / Attending</div>
+      <div class="stat-subtext">Slot verified donors</div>
+    </div>
+
+    <!-- Total Volunteers -->
+    <div class="stat-card">
+      <div class="stat-icon">🤝</div>
+      <div class="stat-number" style="color: var(--nss-blue);">{{ total_volunteers }}</div>
+      <div class="stat-label">Registered Volunteers</div>
+      <div class="stat-subtext">Event assistance crew</div>
+    </div>
+  </div>
+
+  <!-- Detailed Distribution Cards -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px;">
+    <!-- Blood Group Breakdown -->
+    <div style="background:#fff; border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:1.15rem; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+        <span>Blood Group Distribution</span>
+        <span class="badge badge-red">Units</span>
+      </h3>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        {% for row in blood_group_stats %}
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border-light);">
+            <strong style="color:var(--primary-dark-red);">{{ row['blood_group'] }}</strong>
+            <span style="font-weight:700; background:var(--soft-pink); padding:2px 10px; border-radius:12px; color:var(--primary-red);">{{ row['count'] }} donors</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Department Breakdown -->
+    <div style="background:#fff; border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:1.15rem; margin-bottom:16px;">Department Participation</h3>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        {% for row in dept_stats %}
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border-light);">
+            <span style="font-size:0.9rem;">{{ row['department'] }}</span>
+            <strong style="color:var(--nss-blue);">{{ row['count'] }}</strong>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Preferred Slots Breakdown -->
+    <div style="background:#fff; border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow-sm);">
+      <h3 style="font-size:1.15rem; margin-bottom:16px;">Slot Distribution</h3>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        {% for row in slot_stats %}
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border-light);">
+            <span style="font-size:0.9rem;">{{ row['preferred_slot'] }}</span>
+            <strong style="color:var(--text-main);">{{ row['count'] }} donors</strong>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Donor Registration Management Table -->
+  <div style="margin-bottom: 50px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+      <h2 style="font-size: 1.5rem;">Registered Donors Management</h2>
+      <span style="font-size: 0.9rem; color: var(--text-muted);">Showing {{ donors|length }} entries</span>
+    </div>
+
+    <!-- Filter Form -->
+    <form method="GET" action="{{ url_for('admin_dashboard') }}" class="filter-bar">
+      <div style="flex: 1; min-width: 200px;">
+        <input type="text" name="search" class="form-control" placeholder="Search by name, ID, or phone..." value="{{ search_query }}">
+      </div>
+      <div style="min-width: 160px;">
+        <select name="blood_group" class="form-control">
+          <option value="">All Blood Groups</option>
+          <option value="O+" {% if selected_bg == 'O+' %}selected{% endif %}>O+</option>
+          <option value="O-" {% if selected_bg == 'O-' %}selected{% endif %}>O-</option>
+          <option value="A+" {% if selected_bg == 'A+' %}selected{% endif %}>A+</option>
+          <option value="A-" {% if selected_bg == 'A-' %}selected{% endif %}>A-</option>
+          <option value="B+" {% if selected_bg == 'B+' %}selected{% endif %}>B+</option>
+          <option value="B-" {% if selected_bg == 'B-' %}selected{% endif %}>B-</option>
+          <option value="AB+" {% if selected_bg == 'AB+' %}selected{% endif %}>AB+</option>
+          <option value="AB-" {% if selected_bg == 'AB-' %}selected{% endif %}>AB-</option>
+        </select>
+      </div>
+      <div style="min-width: 160px;">
+        <select name="department" class="form-control">
+          <option value="">All Departments</option>
+          {% for d in all_departments %}
+            <option value="{{ d['department'] }}" {% if selected_dept == d['department'] %}selected{% endif %}>{{ d['department'] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+      <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline btn-sm">Reset</a>
+    </form>
+
+    <!-- Table -->
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Reg. ID</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>College ID</th>
+            <th>Dept &amp; Year</th>
+            <th>Blood Group</th>
+            <th>Slot</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for donor in donors %}
+            <tr>
+              <td><strong style="color:var(--primary-red);">{{ donor.registration_id }}</strong></td>
+              <td>
+                <div style="font-weight:700;">{{ donor.full_name }}</div>
+                <small style="color:var(--text-light);">Age: {{ donor.age }} ({{ donor.gender }})</small>
+              </td>
+              <td>
+                <div>{{ donor.mobile }}</div>
+                <small style="color:var(--text-light);">{{ donor.email }}</small>
+              </td>
+              <td><code>{{ donor.college_id }}</code></td>
+              <td>{{ donor.department }}<br><small style="color:var(--text-light);">{{ donor.year }}</small></td>
+              <td>
+                <span class="badge badge-red">{{ donor.blood_group }}</span>
+              </td>
+              <td><small>{{ donor.preferred_slot }}</small></td>
+              <td>
+                <form method="POST" action="{{ url_for('admin_update_status', donor_id=donor.id) }}" style="display:inline;">
+                  <select name="status" onchange="this.form.submit()" style="padding:4px 8px; border-radius:6px; font-size:0.8rem; font-weight:700; border:1px solid var(--border-subtle); background: {% if donor.status == 'Confirmed' %}#dcfce7{% elif donor.status == 'Completed' %}#dbeafe{% elif donor.status == 'Cancelled' %}#fee2e2{% else %}#fef3c7{% endif %};">
+                    <option value="Registered" {% if donor.status == 'Registered' %}selected{% endif %}>Registered</option>
+                    <option value="Confirmed" {% if donor.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+                    <option value="Completed" {% if donor.status == 'Completed' %}selected{% endif %}>Completed</option>
+                    <option value="Cancelled" {% if donor.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                  </select>
+                </form>
+              </td>
+              <td>
+                <form method="POST" action="{{ url_for('admin_delete_donor', donor_id=donor.id) }}" onsubmit="return confirm('Are you sure you want to delete this registration?');" style="display:inline;">
+                  <button type="submit" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:0.85rem; font-weight:600;" title="Delete">
+                    Delete
+                  </button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="9" style="text-align:center; padding:30px; color:var(--text-muted);">
+                No donor records found matching the criteria.
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Volunteers List -->
+  <div>
+    <h2 style="font-size: 1.5rem; margin-bottom: 16px;">Registered NSS Volunteers ({{ volunteers|length }})</h2>
+    <div class="data-table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Roll No.</th>
+            <th>Department</th>
+            <th>Year</th>
+            <th>Phone</th>
+            <th>Assigned Role</th>
+            <th>Reg. Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for vol in volunteers %}
+            <tr>
+              <td><strong>{{ vol.name }}</strong></td>
+              <td><code>{{ vol.college_id }}</code></td>
+              <td>{{ vol.department }}</td>
+              <td>{{ vol.year }}</td>
+              <td>{{ vol.phone }}</td>
+              <td><span class="badge badge-nss">{{ vol.preferred_role }}</span></td>
+              <td><small>{{ vol.registration_date }}</small></td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="7" style="text-align:center; padding:20px; color:var(--text-muted);">
+                No volunteer records yet.
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
